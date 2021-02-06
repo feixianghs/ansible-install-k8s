@@ -1,6 +1,12 @@
 # Kubernetes v1.18 高可用集群自动部署（离线版）
 >### 确保所有节点系统时间一致
-### 1、下载所需文件
+
+### 1、找一台服务器安装Ansible
+```
+yum install epel-release -y
+yum install ansible -y
+```
+### 2、下载所需文件
 
 下载Ansible部署文件：
 
@@ -16,7 +22,7 @@
 ```
 # tar zxf binary_pkg.tar.gz
 ```
-### 2、修改Ansible文件
+### 3、修改Ansible文件
 
 修改hosts文件，根据规划修改对应IP和名称。
 
@@ -34,7 +40,7 @@ cert_hosts:
   k8s:
   etcd:
 ```
-## 3、一键部署
+## 4、一键部署
 ### 架构图
 单Master架构
 ![avatar](https://github.com/lizhenliang/ansible-install-k8s/blob/master/single-master.jpg)
@@ -51,7 +57,7 @@ cert_hosts:
 # ansible-playbook -i hosts multi-master-deploy.yml -uroot -k
 ```
 
-## 4、部署控制
+## 5、部署控制
 如果安装某个阶段失败，可针对性测试.
 
 例如：只运行部署插件
@@ -59,7 +65,7 @@ cert_hosts:
 # ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags addons
 ```
 
-## 5、节点扩容
+## 6、节点扩容
 1）修改hosts，添加新节点ip
 ```
 # vi hosts
